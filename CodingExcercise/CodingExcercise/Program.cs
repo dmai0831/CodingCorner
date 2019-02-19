@@ -10,8 +10,8 @@ namespace CodingExcercise
     {
         static void Main(string[] args)
         {
-            string str1 = "UDDLRRLU";
-            bool _returnOrigin = ReturnOrigin(str1);
+            string str1 = "aab";
+            bool _returnOrigin = isPalindrome(str1);
             Console.WriteLine(_returnOrigin);
             Console.ReadLine();
         }
@@ -97,6 +97,17 @@ namespace CodingExcercise
                 _isReturnOrigin = true;
 
             return _isReturnOrigin;
+        }
+        /// <summary>
+        /// Check if a string is Palindrome
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool isPalindrome(string str)
+        {
+            char[] arr = str.ToCharArray();
+            Array.Reverse(arr);
+            return str.ToLower() == new string(arr).ToLower();
         }
     }
 }
