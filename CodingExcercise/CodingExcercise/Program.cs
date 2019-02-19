@@ -10,9 +10,10 @@ namespace CodingExcercise
     {
         static void Main(string[] args)
         {
-            string data = "amme dna alleb";
-            string result = ReverseString(data);
-            Console.WriteLine("Reverse of the string:" + data + " is " + result);
+            string str1 = "emma";
+            string str2 = "amem";
+            bool _isAnagram = isAnagram(str1, str2);
+            Console.WriteLine(_isAnagram);
             Console.ReadLine();
         }
         
@@ -56,6 +57,20 @@ namespace CodingExcercise
             Array.Reverse(arr);
             reverseStr = new string(arr);
             return reverseStr;
+        }
+        /// <summary>
+        /// Compare if two strings are Anagram. Rearranging the letters of the original word to make a new word or phrase
+        /// </summary>
+        /// <param name="str1">first input string</param>
+        /// <param name="str2">second input string</param>
+        /// <returns></returns>
+        public static bool isAnagram(String str1, String str2)
+        {
+            var arr1 = str1.ToArray();
+            var arr2 = str2.ToArray();
+            Array.Sort(arr1);
+            Array.Sort(arr2);
+            return new string(arr1) == new string(arr2);
         }
     }
 }
