@@ -10,10 +10,9 @@ namespace CodingExcercise
     {
         static void Main(string[] args)
         {
-            string str1 = "emma";
-            string str2 = "amem";
-            bool _isAnagram = isAnagram(str1, str2);
-            Console.WriteLine(_isAnagram);
+            string str1 = "UDDLRRLU";
+            bool _returnOrigin = ReturnOrigin(str1);
+            Console.WriteLine(_returnOrigin);
             Console.ReadLine();
         }
         
@@ -71,6 +70,33 @@ namespace CodingExcercise
             Array.Sort(arr1);
             Array.Sort(arr2);
             return new string(arr1) == new string(arr2);
+        }
+        /// <summary>
+        /// Robot Return to Origin.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool ReturnOrigin(string str)
+        {
+            str = str.ToUpper();
+            bool _isReturnOrigin = false;
+            int x = 0, y = 0;
+            char[] arr = str.ToCharArray();
+            foreach(char m in arr)
+            {
+                if (m == 'U')
+                    y++;
+                if (m == 'D')
+                    y--;
+                if (m == 'L')
+                    x--;
+                if (m == 'R')
+                    x++;
+            }
+            if (x == 0 && y == 0)
+                _isReturnOrigin = true;
+
+            return _isReturnOrigin;
         }
     }
 }
