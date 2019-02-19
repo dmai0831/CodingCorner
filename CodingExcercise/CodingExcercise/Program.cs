@@ -10,7 +10,10 @@ namespace CodingExcercise
     {
         static void Main(string[] args)
         {
-            
+            string data = "amme dna alleb";
+            string result = ReverseString(data);
+            Console.WriteLine("Reverse of the string:" + data + " is " + result);
+            Console.ReadLine();
         }
         
         /// <summary>
@@ -41,6 +44,18 @@ namespace CodingExcercise
             }
             return index;
         }
-        
+        /// <summary>
+        /// Reverse String
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns>reverse string</returns>
+        public static string ReverseString(String str)
+        {
+            string reverseStr = "";
+            char[] arr = str.ToCharArray();
+            Array.Reverse(arr);
+            reverseStr = new string(arr);
+            return reverseStr;
+        }
     }
 }
