@@ -10,10 +10,18 @@ namespace CodingExcercise
     {
         static void Main(string[] args)
         {
-            string str1 = "aab";
-            bool _returnOrigin = isPalindrome(str1);
-            Console.WriteLine(_returnOrigin);
+            string str1 = "https://leetcode.com/problems/design-tinyurl";
+            Codec.Base64 base64 = new Codec.Base64();
+            string encodeURL = base64.Encode(str1);
+            Console.WriteLine(encodeURL);
+            Console.WriteLine(base64.Decode(encodeURL));
+
+            Codec.NewGuid newGuid = new Codec.NewGuid();
+            string encodeURL1 = newGuid.Encode(str1);
+            Console.WriteLine(encodeURL);
+            Console.WriteLine(newGuid.Decode(encodeURL1));
             Console.ReadLine();
+
         }
         
         /// <summary>
@@ -107,7 +115,60 @@ namespace CodingExcercise
         {
             char[] arr = str.ToCharArray();
             Array.Reverse(arr);
+            
             return str.ToLower() == new string(arr).ToLower();
+        }
+        
+    }
+    //Encode and Decode tinyURL
+    public class Codec
+    {
+        private static Dictionary<string, string> dty = new Dictionary<string, string>();
+        public class Base64
+        {
+            /// <summary>
+            /// Encode using Base64String
+            /// </summary>
+            /// <param name="longURL"></param>
+            /// <returns></returns>
+            public string Encode(string longURL)
+            {
+                return Convert.ToBase64String(Encoding.UTF8.GetBytes(longURL));
+            }
+            /// <summary>
+            /// Decode using Base64String
+            /// </summary>
+            /// <param name="shortURL"></param>
+            /// <returns></returns>
+            public string Decode(string shortURL)
+            {
+                return Encoding.UTF8.GetString(Convert.FromBase64String(shortURL));
+            }
+        }
+        public class NewGuid
+        {
+            /// <summary>
+            /// Encode using NewGuid
+            /// </summary>
+            /// <param name="longURL"></param>
+            /// <returns></returns>
+            public string Encode(string longURL)
+            {
+                string guid = Guid.NewGuid().ToString();
+                dty.Add(guid, longURL);
+
+                return guid;
+            }
+            /// <summary>
+            /// Decode using NewGuid
+            /// </summary>
+            /// <param name="shortURL"></param>
+            /// <returns></returns>
+            public string Decode(string shortURL)
+            {
+                string url = String.Empty;
+                return dty.TryGetValue(shortURL, out url)?url:null;
+            }
         }
     }
 }
