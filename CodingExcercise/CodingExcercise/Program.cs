@@ -10,8 +10,8 @@ namespace CodingExcercise
     {
         static void Main(string[] args)
         {
-            
 
+            bool isValid = IsValidParentheses("[{]}");
 
         }
         
@@ -172,6 +172,39 @@ namespace CodingExcercise
             SetLandToWater(grid, i - 1, j);
             SetLandToWater(grid, i, j + 1);
             SetLandToWater(grid, i, j - 1);
+        }
+        /// <summary>
+        /// 20. Valid Parentheses
+        /// </summary>
+        public static bool IsValidParentheses(string str)
+        {
+            
+            if (str.Length % 2 != 0)
+                return false;
+
+            Stack<char> stack = new Stack<char>();
+            foreach(char s in str.ToCharArray())
+            {
+                if (s == '{' || s == '[' || s == '(')
+                {
+                    stack.Push(s);
+                }
+                else
+                {
+                    if (stack.Count > 0)
+                    {
+                        if (isPair(stack.Peek(), s))
+                            stack.Pop();
+                    }
+                }
+            }
+            if (stack.Count == 0)
+                return true;
+            return false;
+        }
+        private static bool isPair(char open, char close)
+        {
+            return open == '(' && close == ')' || open == '[' && close == ']' || open == '{' && close == '}';    
         }
 
     }
