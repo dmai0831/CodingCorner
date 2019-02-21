@@ -10,17 +10,8 @@ namespace CodingExcercise
     {
         static void Main(string[] args)
         {
-            string str1 = "https://leetcode.com/problems/design-tinyurl";
-            Codec.Base64 base64 = new Codec.Base64();
-            string encodeURL = base64.Encode(str1);
-            Console.WriteLine(encodeURL);
-            Console.WriteLine(base64.Decode(encodeURL));
+            
 
-            Codec.NewGuid newGuid = new Codec.NewGuid();
-            string encodeURL1 = newGuid.Encode(str1);
-            Console.WriteLine(encodeURL);
-            Console.WriteLine(newGuid.Decode(encodeURL1));
-            Console.ReadLine();
 
         }
         
@@ -118,7 +109,71 @@ namespace CodingExcercise
             
             return str.ToLower() == new string(arr).ToLower();
         }
-        
+        /// <summary>
+        /// 200. Number of Islands
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <returns></returns>
+        public static int NumberIslands(char[,] grid)
+        {
+            /*
+            Given a 2d grid map of '1's(land) and '0's(water), count the number of islands.An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+            Example 1:
+
+            Input:
+            11110
+            11010
+            11000
+            00000
+
+            Output: 1
+            Example 2:
+
+            Input:
+            11000
+            11000
+            00100
+            00011
+
+            Output: 3
+            */
+            int numberIslands = 0;
+
+            if (grid == null)
+                return numberIslands;
+
+            for(int i=0; i <= grid.GetUpperBound(0); i++)
+            {
+                for(int j=0; j <= grid.GetUpperBound(1); j++)
+                {
+                    if(grid[i,j] == '1')
+                    {
+                        numberIslands++;
+                        //set current position and all neightbor to 0
+                        SetLandToWater(grid, i, j);
+                    }
+                }
+            }
+            return numberIslands;
+        }
+        private static void SetLandToWater(char[,] grid, int i, int j)
+        {
+            //1. If row is less than 0
+            //2. If row is greater than grid.length(row length)
+            //3. If column is less than 0
+            //4. If column is greater than grid.length(column lenghth)
+            //5. If the current position is 0
+            if (i < 0 || i > grid.GetUpperBound(0) || j < 0 || j > grid.GetUpperBound(1) || grid[i, j] == '0')
+                return;
+
+            //set current position is 0
+            grid[i, j] = '0';
+            SetLandToWater(grid, i + 1, j);
+            SetLandToWater(grid, i - 1, j);
+            SetLandToWater(grid, i, j + 1);
+            SetLandToWater(grid, i, j - 1);
+        }
+
     }
     //Encode and Decode tinyURL
     public class Codec
